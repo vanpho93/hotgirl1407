@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <base href="../">
         <title>Khoa Pham</title>
         <style>
             hr {
@@ -15,17 +16,17 @@
     </head>
     <body>
         <div>
-            <h3>Mai Phương Thuý</h3>
+            <h3><%= girl.name %></h3>
             <div class="div-control">
                 <a href="#">Trở lại</a>
                 <a href="#">Tiếp</a>
             </div>
             <hr />
-            <img src="1.jpg" alt="">
+            <img src="<%= girl.image %>" alt="">
             <hr />
             <div class="div-control">
-                <a href="#">8 Like</a>
-                <a href="#">10 Dislike</a>
+                <a href="#"><%= girl.like %> Like</a>
+                <a href="#"><%= girl.dislike %> Dislike</a>
             </div>
         </div>
     </body>
