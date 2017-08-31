@@ -18,14 +18,14 @@
         <div>
             <h3><%= girl.name %></h3>
             <div class="div-control">
-                <a href="#">Trở lại</a>
-                <a href="#">Tiếp</a>
+                <a href="/hotgirl/<%= girl.id - 1 %>">Trở lại</a>
+                <a href="/hotgirl/<%= girl.id + 1 %>">Tiếp</a>
             </div>
             <hr />
-            <img src="<%= girl.image %>" alt="">
+            <img src="<%= girl.image %>" alt="" width="300px">
             <hr />
             <div class="div-control">
-                <a href="#"><%= girl.like %> Like</a>
+                <a href="/like/<%= girl.id %>"><%= girl.like %> Like</a>
                 <a href="#"><%= girl.dislike %> Dislike</a>
             </div>
         </div>
