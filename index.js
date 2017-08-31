@@ -21,3 +21,10 @@ app.get('/like/:id', (req, res) => {
     .then(() => res.redirect('/hotgirl/' + id))
     .catch(err => res.send(err.message));
 });
+
+app.get('/xlike/:id', (req, res) => {
+    const { id } = req.params;
+    HotGirl.incrLikeById(id)
+    .then(like => res.send(like + ''))
+    .catch(err => res.send(err.message));
+});

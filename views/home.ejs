@@ -13,6 +13,7 @@
                 justify-content: space-between
             }
         </style>
+        <script src="jquery.js"></script>
     </head>
     <body>
         <div>
@@ -25,9 +26,17 @@
             <img src="<%= girl.image %>" alt="" width="300px">
             <hr />
             <div class="div-control">
-                <a href="/like/<%= girl.id %>"><%= girl.like %> Like</a>
+                <a href="/like/<%= girl.id %>" id="a-like"><%= girl.like %> Like</a>
                 <a href="#"><%= girl.dislike %> Dislike</a>
             </div>
         </div>
     </body>
+    <script>
+        const id = '<%= girl.id %>';
+
+        $('#a-like').click((e) => {
+            e.preventDefault();
+            $.get('/xlike/' + id, likeNumber => $('#a-like').text(likeNumber + ' Like'));
+        });
+    </script>
 </html>

@@ -16,13 +16,17 @@ class HotGirl {
     //     });
     // }
     static incrLikeById(id) {
-        const updateSql = 'UPDATE public."HotGirl" SET "like"= "like" + 1 WHERE id = $1';
-        return queryDB(updateSql, [id]);
+        const updateSql = 'UPDATE public."HotGirl" SET "like"= "like" + 1 WHERE id = $1  RETURNING "like"';
+        return queryDB(updateSql, [id])
+        .then(result => {
+            if(!result.rows[0]) throw new Error('Hotgirl khong ton tai') ;
+            return result.rows[0].like;
+        });
     }
 }
 
 module.exports = HotGirl;
 
 // HotGirl.incrLikeById(1)
-// .then(() => console.log('Thanh cong'))
+// .then((like) => console.log(like))
 // .catch(() => console.log('That bai'));
