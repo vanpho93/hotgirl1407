@@ -28,3 +28,10 @@ app.get('/xlike/:id', (req, res) => {
     .then(like => res.send(like + ''))
     .catch(err => res.send(err.message));
 });
+
+app.get('/api/hotgirl/:id', (req, res) => {
+    const { id } = req.params;
+    HotGirl.getGirlById(id)
+    .then(girl => res.send(girl))
+    .catch(err => res.send(err.message));
+});

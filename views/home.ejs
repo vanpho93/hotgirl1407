@@ -19,8 +19,8 @@
         <div>
             <h3><%= girl.name %></h3>
             <div class="div-control">
-                <a href="/hotgirl/<%= girl.id - 1 %>">Trở lại</a>
-                <a href="/hotgirl/<%= girl.id + 1 %>">Tiếp</a>
+                <a href="#" id="a-next">Trở lại</a>
+                <a href="#" id="a-pre">Tiếp</a>
             </div>
             <hr />
             <img src="<%= girl.image %>" alt="" width="300px">
@@ -37,6 +37,15 @@
         $('#a-like').click((e) => {
             e.preventDefault();
             $.get('/xlike/' + id, likeNumber => $('#a-like').text(likeNumber + ' Like'));
+        });
+
+        $('#a-next').click((e) => {
+            e.preventDefault();
+            $.get('/api/hotgirl/' + (+id + 1), x => console.log(x));
+        });
+
+        $('#a-pre').click((e) => {
+            e.preventDefault();
         });
     </script>
 </html>
