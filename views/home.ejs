@@ -17,13 +17,13 @@
     </head>
     <body>
         <div>
-            <h3><%= girl.name %></h3>
+            <h3 id="h3-name"><%= girl.name %></h3>
             <div class="div-control">
-                <a href="#" id="a-next">Trở lại</a>
-                <a href="#" id="a-pre">Tiếp</a>
+                <a href="#" id="a-pre">Trở lại</a>
+                <a href="#" id="a-next">Tiếp</a>
             </div>
             <hr />
-            <img src="<%= girl.image %>" alt="" width="300px">
+            <img src="<%= girl.image %>" alt="" width="300px" id="imgProfile">
             <hr />
             <div class="div-control">
                 <a href="/like/<%= girl.id %>" id="a-like"><%= girl.like %> Like</a>
@@ -32,20 +32,33 @@
         </div>
     </body>
     <script>
-        const id = '<%= girl.id %>';
+        let currentId = '<%= girl.id %>';
 
         $('#a-like').click((e) => {
             e.preventDefault();
-            $.get('/xlike/' + id, likeNumber => $('#a-like').text(likeNumber + ' Like'));
+            $.get('/xlike/' + currentId, likeNumber => $('#a-like').text(likeNumber + ' Like'));
         });
 
         $('#a-next').click((e) => {
             e.preventDefault();
-            $.get('/api/hotgirl/' + (+id + 1), x => console.log(x));
+            $.get('/api/hotgirl/' + (+currentId + 1), hotGirl => {
+                const { id, name, like, dislike, image } = hotGirl;
+                currentId = id;
+                $('#h3-name').text(name);
+                $('#a-like').text(like + ' Like');
+                $('#imgProfile').attr('src', image);
+            });
         });
 
         $('#a-pre').click((e) => {
             e.preventDefault();
+            $.get('/api/hotgirl/' + (+currentId - 1), hotGirl => {
+                const { id, name, like, dislike, image } = hotGirl;
+                currentId = id;
+                $('#h3-name').text(name);
+                $('#a-like').text(like + ' Like');
+                $('#imgProfile').attr('src', image);
+            });
         });
     </script>
 </html>
